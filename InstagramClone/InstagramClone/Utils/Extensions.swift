@@ -8,6 +8,25 @@
 
 import UIKit
 
+extension UIButton {
+    func customAttributedTitle(firstPart: String, secondPart: String) {
+        let attributedTitle = NSMutableAttributedString(string: "\(firstPart)  ", attributes: [.foregroundColor: UIColor(white: 1, alpha: 0.87), .font: UIFont.systemFont(ofSize: 14)])
+        
+        let boldTitle = NSMutableAttributedString(string: "\(secondPart)", attributes: [.foregroundColor: UIColor(white: 1, alpha: 0.87), .font: UIFont.boldSystemFont(ofSize: 14)])
+        attributedTitle.append(boldTitle)
+        setAttributedTitle(attributedTitle, for: .normal)
+    }
+    
+    func customLoginButton(buttonName: String) {
+        setTitle(buttonName, for: .normal)
+        setTitleColor(.white, for: .normal)
+        backgroundColor = UIColor(red: 134/255, green: 0/255, blue: 224/255, alpha: 0.6)
+        layer.cornerRadius = 5
+        setHeight(50)
+        titleLabel?.font = UIFont.boldSystemFont(ofSize: 16)
+    }
+}
+
 extension UIViewController {
     
     func configureGradientLayer() {
@@ -26,18 +45,6 @@ extension UIViewController {
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
         present(alert, animated: true, completion: nil)
-    }
-}
-
-extension UIButton {
-    func attributedTitle(firstPart: String, secondPart: String) {
-        let atts: [NSAttributedString.Key: Any] = [.foregroundColor: UIColor(white: 1, alpha: 0.87), .font: UIFont.systemFont(ofSize: 16)]
-        let attributedTitle = NSMutableAttributedString(string: "\(firstPart) ", attributes: atts)
-        
-        let boldAtts: [NSAttributedString.Key: Any] = [.foregroundColor: UIColor(white: 1, alpha: 0.87), .font: UIFont.boldSystemFont(ofSize: 16)]
-        attributedTitle.append(NSAttributedString(string: secondPart, attributes: boldAtts))
-        
-        setAttributedTitle(attributedTitle, for: .normal)
     }
 }
 

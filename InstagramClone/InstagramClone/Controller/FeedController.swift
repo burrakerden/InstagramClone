@@ -10,11 +10,10 @@ import UIKit
 let reuseIdentifier = "cell"
 
 class FeedController: UICollectionViewController {
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         collectionView.register(FeedCell.self, forCellWithReuseIdentifier: reuseIdentifier)
-
     }
     
 }
@@ -36,6 +35,9 @@ extension FeedController {
 
 extension FeedController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        CGSize(width: view.frame.width, height: 200)
+        let width = view.frame.width
+        var height = width + 8 + 40 + 8
+        height += 110 //60 for image 50 for buttons like comment
+        return CGSize(width: width, height: height)
     }
 }

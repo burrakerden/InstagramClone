@@ -11,6 +11,8 @@ class LoginController: UIViewController {
     
     //MARK: - Properties
     
+    private var viewModel = LoginViewModel()
+    
     private let iconImage: UIImageView = {
         let iv = UIImageView()
         iv.image = UIImage(named: "Instagram_logo_white")
@@ -34,6 +36,7 @@ class LoginController: UIViewController {
     private lazy var loginButton: UIButton = {
         let button = UIButton(type: .system)
         button.customLoginButton(buttonName: "Log In")
+        button.isEnabled = false
         button.addTarget(self, action: #selector(loginButtonTapped), for: .touchUpInside)
         return button
     }()
@@ -57,8 +60,11 @@ class LoginController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         configureUI()
+        configureNotificationObservers()
         // Do any additional setup after loading the view.
     }
+    
+    //MARK: - Helpers
     
     func configureUI() {
         navigationController?.navigationBar.isHidden = true
@@ -93,10 +99,28 @@ class LoginController: UIViewController {
         print("forgotPasswordButtonTapped")
     }
     
+    @objc func textDidChange(sender: UITextField) {
+        sender == emailTextField ? (viewModel.email = sender.text) : (viewModel.password = sender.text)
+        updateForm()
+    }
+    
     @objc func dontHaveAccountButtonTapped() {
         let vc = RegistrationController()
         navigationController?.pushViewController(vc, animated: true)
-        
+    }
+    
+    func configureNotificationObservers() {
+        emailTextField.addTarget(self, action: #selector(textDidChange), for: .editingChanged)
+        passwordTextField.addTarget(self, action: #selector(textDidChange), for: .editingChanged)
+
     }
 }
 
+//MARK: - FormViewModel
+
+extension LoginController: FormViewModel {
+    func updateForm() {
+        loginButton.backgroundColor = viewModel.buttonBgColour
+        loginButton.isEnabled = viewModel.formIsValid
+    }
+}

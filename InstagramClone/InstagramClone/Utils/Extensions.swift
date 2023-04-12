@@ -20,7 +20,7 @@ extension UIButton {
     func customLoginButton(buttonName: String) {
         setTitle(buttonName, for: .normal)
         setTitleColor(.white, for: .normal)
-        backgroundColor = UIColor(red: 134/255, green: 0/255, blue: 224/255, alpha: 0.6)
+        backgroundColor = UIColor(red: 134/255, green: 0/255, blue: 224/255, alpha: 0.2)
         layer.cornerRadius = 5
         setHeight(50)
         titleLabel?.font = UIFont.boldSystemFont(ofSize: 16)

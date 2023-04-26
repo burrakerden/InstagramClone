@@ -12,6 +12,7 @@ class RegistrationController: UIViewController {
     //MARK: - Properties
     
     var viewModel = RegistrationViewModel()
+    private var profileImage: UIImage?
     
     private lazy var plusPhotoButton: UIButton = {
         let button = UIButton(type: .system)
@@ -42,7 +43,7 @@ class RegistrationController: UIViewController {
         let button = UIButton(type: .system)
         button.customLoginButton(buttonName: "Sing Up")
         button.isEnabled = false
-        //        button.addTarget(self, action: #selector(loginButtonTapped), for: .touchUpInside)
+        button.addTarget(self, action: #selector(signUpButtonTapped), for: .touchUpInside)
         return button
     }()
     
@@ -84,6 +85,27 @@ class RegistrationController: UIViewController {
     }
     
     //MARK: - Actions
+    
+    @objc func signUpButtonTapped() {
+        guard let email = emailTextField.text else {return}
+        guard let password = passwordTextField.text else {return}
+        guard let username = usernameTextField.text?.lowercased() else {return}
+        guard let fullname = fullnameTextField.text else {return}
+        guard let profileImage else {return}
+        
+        let credentials = AuthCredentials(email: email, password: password,
+                                          fullname: fullname, username: username,
+                                          profileImage: profileImage)
+        
+        AuthService.registerUser(credentials: credentials) { error in
+            if let error = error {
+                print("DEBUG: Failed to register user \(error.localizedDescription)")
+                return
+            }
+            print("DEBUG: Succesfully registered user with firestore")
+
+        }
+    }
     
     @objc func alreadyHaveAccountButtonTapped() {
         navigationController?.popViewController(animated: true)
@@ -134,6 +156,7 @@ extension RegistrationController: FormViewModel {
 extension RegistrationController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         guard let image = info[.editedImage] as? UIImage else {return}
+        profileImage = image
         plusPhotoButton.layer.cornerRadius = plusPhotoButton.frame.width / 2
         plusPhotoButton.layer.masksToBounds = true
         plusPhotoButton.layer.borderWidth = 2

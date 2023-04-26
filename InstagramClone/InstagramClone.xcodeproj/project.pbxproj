@@ -31,6 +31,8 @@
 		962EEDF529E81D3700CDC449 /* FirebaseMessaging in Frameworks */ = {isa = PBXBuildFile; productRef = 962EEDF429E81D3700CDC449 /* FirebaseMessaging */; };
 		962EEDF729E81D3700CDC449 /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = 962EEDF629E81D3700CDC449 /* FirebaseStorage */; };
 		962EEDF929E81D7400CDC449 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 962EEDF829E81D7400CDC449 /* GoogleService-Info.plist */; };
+		969F093829F938D400934463 /* ImageUploader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 969F093729F938D400934463 /* ImageUploader.swift */; };
+		969F093A29F938E100934463 /* AuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 969F093929F938E100934463 /* AuthService.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -55,6 +57,8 @@
 		962EEDE929E2E60D00CDC449 /* CustomTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextField.swift; sourceTree = "<group>"; };
 		962EEDEB29E2F40F00CDC449 /* AuthenticationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationViewModel.swift; sourceTree = "<group>"; };
 		962EEDF829E81D7400CDC449 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		969F093729F938D400934463 /* ImageUploader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageUploader.swift; sourceTree = "<group>"; };
+		969F093929F938E100934463 /* AuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthService.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -121,6 +125,8 @@
 		962EEDC929E0351F00CDC449 /* API */ = {
 			isa = PBXGroup;
 			children = (
+				969F093729F938D400934463 /* ImageUploader.swift */,
+				969F093929F938E100934463 /* AuthService.swift */,
 			);
 			path = API;
 			sourceTree = "<group>";
@@ -267,6 +273,8 @@
 				962EEDCF29E0354500CDC449 /* MainTabController.swift in Sources */,
 				962EEDDD29E0402800CDC449 /* FeedController.swift in Sources */,
 				962EEDE329E04A1000CDC449 /* Extensions.swift in Sources */,
+				969F093829F938D400934463 /* ImageUploader.swift in Sources */,
+				969F093A29F938E100934463 /* AuthService.swift in Sources */,
 				962EEDB729E0350800CDC449 /* SceneDelegate.swift in Sources */,
 				962EEDE829E2D68400CDC449 /* RegistrationController.swift in Sources */,
 			);

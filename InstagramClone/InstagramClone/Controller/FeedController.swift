@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Firebase
 
 let reuseIdentifier = "cell"
 
@@ -13,8 +14,28 @@ class FeedController: UICollectionViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        collectionView.register(FeedCell.self, forCellWithReuseIdentifier: reuseIdentifier)
+        configureUI()
     }
+    
+    //MARK: - Helpers
+    
+    func configureUI() {
+        collectionView.register(FeedCell.self, forCellWithReuseIdentifier: reuseIdentifier)
+        navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Logout", style: .plain, target: self, action: #selector(handleLogout))
+    }
+    
+    @objc func handleLogout() {
+        do {
+           try Auth.auth().signOut()
+            let controller = LoginController()
+            let nav = UINavigationController(rootViewController: controller)
+            nav.modalPresentationStyle = .fullScreen
+            self.present(nav, animated: true)
+        } catch {
+            print("DEBUG: Failed to sign out")
+        }
+    }
+    
     
 }
 

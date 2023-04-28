@@ -25,7 +25,6 @@ class RegistrationController: UIViewController {
     private let emailTextField: UITextField = {
         let tf = CustomTextField(placeholder: "Email")
         tf.keyboardType = .emailAddress
-        
         return tf
     }()
     
@@ -103,6 +102,7 @@ class RegistrationController: UIViewController {
                 return
             }
             print("DEBUG: Succesfully registered user with firestore")
+            self.dismiss(animated: true)
 
         }
     }

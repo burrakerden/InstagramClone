@@ -92,7 +92,16 @@ class LoginController: UIViewController {
     //MARK: - Actions
     
     @objc func loginButtonTapped() {
-        print("loginButtonTapped")
+        guard let email = emailTextField.text else {return}
+        guard let password = passwordTextField.text else {return}
+        AuthService.logUserIn(email: email, password: password) { result, error in
+            if let error = error {
+                print("DEBUG: Failed to login user \(error.localizedDescription)")
+                return
+            }
+            self.dismiss(animated: true)
+        }
+       
     }
     
     @objc func forgotPasswordButtonTapped() {

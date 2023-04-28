@@ -123,7 +123,7 @@ class FeedCell: UICollectionViewCell {
         postTimeLabel.anchor(top: captionLabel.bottomAnchor, left: leftAnchor, paddingTop: 6, paddingLeft: 8)
         
         addSubview(saveButton)
-        saveButton.anchor(top: postImageView.bottomAnchor, right: rightAnchor, paddingTop: 8, paddingRight: 8)
+        saveButton.anchor(top: postImageView.bottomAnchor, right: rightAnchor, paddingTop: 10, paddingRight: 10)
 
     }
     

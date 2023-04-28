@@ -7,23 +7,30 @@
 
 import UIKit
 
-class ProfileController: UIViewController {
+let cellIdentifier = "profileCell"
+let headerdentifier = "profileHeader"
+
+class ProfileController: UICollectionViewController {
+    
+    //MARK: - Properties
+
+
+    //MARK: - Life Cycle
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
         // Do any additional setup after loading the view.
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    //MARK: - Helpers
+    
+    func configureCollectionView() {
+        view.backgroundColor = .white
+        collectionView.register(ProfileCell.self, forCellWithReuseIdentifier: cellIdentifier)
+        collectionView.register(ProfileHeader.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: headerdentifier)
     }
-    */
+    
+    //MARK: - Actions
+
 
 }

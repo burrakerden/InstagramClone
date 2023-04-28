@@ -33,6 +33,8 @@
 		962EEDF929E81D7400CDC449 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 962EEDF829E81D7400CDC449 /* GoogleService-Info.plist */; };
 		969F093829F938D400934463 /* ImageUploader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 969F093729F938D400934463 /* ImageUploader.swift */; };
 		969F093A29F938E100934463 /* AuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 969F093929F938E100934463 /* AuthService.swift */; };
+		969F093C29FAAB6500934463 /* ProfileCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 969F093B29FAAB6500934463 /* ProfileCell.swift */; };
+		969F093E29FAABF400934463 /* ProfileHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 969F093D29FAABF400934463 /* ProfileHeader.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -59,6 +61,8 @@
 		962EEDF829E81D7400CDC449 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		969F093729F938D400934463 /* ImageUploader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageUploader.swift; sourceTree = "<group>"; };
 		969F093929F938E100934463 /* AuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthService.swift; sourceTree = "<group>"; };
+		969F093B29FAAB6500934463 /* ProfileCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileCell.swift; sourceTree = "<group>"; };
+		969F093D29FAABF400934463 /* ProfileHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileHeader.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -151,6 +155,8 @@
 			children = (
 				962EEDE029E045B900CDC449 /* FeedCell.swift */,
 				962EEDE929E2E60D00CDC449 /* CustomTextField.swift */,
+				969F093B29FAAB6500934463 /* ProfileCell.swift */,
+				969F093D29FAABF400934463 /* ProfileHeader.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -261,6 +267,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				962EEDEA29E2E60D00CDC449 /* CustomTextField.swift in Sources */,
+				969F093E29FAABF400934463 /* ProfileHeader.swift in Sources */,
 				962EEDB929E0350800CDC449 /* ViewController.swift in Sources */,
 				962EEDE629E2D66C00CDC449 /* LoginController.swift in Sources */,
 				962EEDE129E045B900CDC449 /* FeedCell.swift in Sources */,
@@ -275,6 +282,7 @@
 				962EEDE329E04A1000CDC449 /* Extensions.swift in Sources */,
 				969F093829F938D400934463 /* ImageUploader.swift in Sources */,
 				969F093A29F938E100934463 /* AuthService.swift in Sources */,
+				969F093C29FAAB6500934463 /* ProfileCell.swift in Sources */,
 				962EEDB729E0350800CDC449 /* SceneDelegate.swift in Sources */,
 				962EEDE829E2D68400CDC449 /* RegistrationController.swift in Sources */,
 			);

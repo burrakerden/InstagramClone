@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Firebase
 
 class MainTabController: UITabBarController {
     
@@ -15,14 +16,27 @@ class MainTabController: UITabBarController {
         super.viewDidLoad()
         view.backgroundColor = .red
         configVC()
+        checkIfUserIsLoggedIn()
     }
     
     override func viewDidLayoutSubviews() {
         changeHeightOfTabBar()
     }
     
-    //MARK: - Helpers
+    //MARK: - API
     
+    func checkIfUserIsLoggedIn() {
+        if Auth.auth().currentUser == nil {
+            DispatchQueue.main.async {
+                let controller = LoginController()
+                let nav = UINavigationController(rootViewController: controller)
+                nav.modalPresentationStyle = .fullScreen
+                self.present(nav, animated: true)
+            }
+        }
+    }
+    
+    //MARK: - Helpers
 
     func changeHeightOfTabBar() {
         if UIDevice().userInterfaceIdiom == .phone {
@@ -35,11 +49,12 @@ class MainTabController: UITabBarController {
     
     func configVC() {
         let layout = UICollectionViewFlowLayout()
+        let profileLayout = UICollectionViewFlowLayout()
         let vc1 = UINavigationController(rootViewController: FeedController(collectionViewLayout: layout))
         let vc2 = UINavigationController(rootViewController: SearchController())
         let vc3 = UINavigationController(rootViewController: ImageSelectorController())
         let vc4 = UINavigationController(rootViewController: NotificationController())
-        let vc5 = UINavigationController(rootViewController: ProfileController())
+        let vc5 = UINavigationController(rootViewController: ProfileController(collectionViewLayout: profileLayout))
         vc1.tabBarItem = UITabBarItem(title: nil, image: UIImage(named: "home_unselected"), selectedImage: UIImage(named: "home_selected"))
         vc2.tabBarItem = UITabBarItem(title: nil, image: UIImage(named: "search_unselected"), selectedImage: UIImage(named: "search_selected"))
         vc3.tabBarItem = UITabBarItem(title: nil, image: UIImage(named: "plus_unselected"), selectedImage: UIImage(named: "plus_unselected"))

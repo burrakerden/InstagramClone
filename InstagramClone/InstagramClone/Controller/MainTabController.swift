@@ -11,12 +11,19 @@ import Firebase
 class MainTabController: UITabBarController {
     
     //MARK: - Life Cycle
+    
+    private var user: User? {
+        didSet {
+            guard let user else {return}
+            configVC(with: user)
+        }
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .red
-        configVC()
         checkIfUserIsLoggedIn()
+        fetchUser()
     }
     
     override func viewDidLayoutSubviews() {
@@ -25,10 +32,19 @@ class MainTabController: UITabBarController {
     
     //MARK: - API
     
+    
+    func fetchUser() {
+        UserService.fetchUser { user in
+            self.user = user
+        }
+    }
+    
     func checkIfUserIsLoggedIn() {
+        
         if Auth.auth().currentUser == nil {
             DispatchQueue.main.async {
                 let controller = LoginController()
+                controller.delegate = self
                 let nav = UINavigationController(rootViewController: controller)
                 nav.modalPresentationStyle = .fullScreen
                 self.present(nav, animated: true)
@@ -47,14 +63,14 @@ class MainTabController: UITabBarController {
         }
     }
     
-    func configVC() {
+    func configVC(with user: User) {
         let layout = UICollectionViewFlowLayout()
-        let profileLayout = UICollectionViewFlowLayout()
+        let profile = ProfileController(user: user)
         let vc1 = UINavigationController(rootViewController: FeedController(collectionViewLayout: layout))
         let vc2 = UINavigationController(rootViewController: SearchController())
         let vc3 = UINavigationController(rootViewController: ImageSelectorController())
         let vc4 = UINavigationController(rootViewController: NotificationController())
-        let vc5 = UINavigationController(rootViewController: ProfileController(collectionViewLayout: profileLayout))
+        let vc5 = UINavigationController(rootViewController: profile)
         vc1.tabBarItem = UITabBarItem(title: nil, image: UIImage(named: "home_unselected"), selectedImage: UIImage(named: "home_selected"))
         vc2.tabBarItem = UITabBarItem(title: nil, image: UIImage(named: "search_unselected"), selectedImage: UIImage(named: "search_selected"))
         vc3.tabBarItem = UITabBarItem(title: nil, image: UIImage(named: "plus_unselected"), selectedImage: UIImage(named: "plus_unselected"))
@@ -65,4 +81,14 @@ class MainTabController: UITabBarController {
         tabBar.backgroundColor = .systemGray5
     }
 
+}
+
+extension MainTabController: AuthenticationDelegate {
+    func authenticationDidComplete() {
+        fetchUser()
+        self.dismiss(animated: true)
+
+    }
+    
+    
 }

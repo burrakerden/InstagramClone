@@ -7,22 +7,27 @@
 
 import Foundation
 import UIKit
+import SDWebImage
+import SDWebImageSVGCoder
 
 class ProfileHeader: UICollectionReusableView {
     
     //MARK: - Properties
+    
+    var viewModel: ProfileHeaderViewModel? {
+        didSet { configure() }
+    }
 
     private let profileImageView: UIImageView = {
         let iv = UIImageView()
-        iv.image = UIImage(named: "venom-7")
         iv.contentMode = .scaleAspectFill
         iv.clipsToBounds = true
+        iv.backgroundColor = .lightGray
         return iv
     }()
     
     private let nameLabel: UILabel = {
         let label = UILabel()
-        label.text = "Venom Black"
         label.font = UIFont.boldSystemFont(ofSize: 14)
         return label
     }()
@@ -66,7 +71,7 @@ class ProfileHeader: UICollectionReusableView {
     private lazy var gridButton: UIButton = {
         let button = UIButton(type: .system)
         button.setImage(UIImage(named: "grid"), for: .normal)
-        button.addTarget(self, action: #selector(handleprofileFollowTapped), for: .touchUpInside)
+        button.addTarget(self, action: #selector(handleGridButtonTapped), for: .touchUpInside)
         return button
     }()
     
@@ -139,6 +144,11 @@ class ProfileHeader: UICollectionReusableView {
         print("DEBUG: handleprofileFollowTapped")
 
     }
+    
+    @objc func handleGridButtonTapped() {
+        print("DEBUG: handleGridButtonTapped")
+
+    }
 
     //MARK: - Helpers
     
@@ -146,5 +156,12 @@ class ProfileHeader: UICollectionReusableView {
         let attributedText = NSMutableAttributedString(string: "\(value)\n", attributes: [.font: UIFont.boldSystemFont(ofSize: 14)])
         attributedText.append(NSAttributedString(string: label, attributes: [.font: UIFont.systemFont(ofSize: 14), .foregroundColor: UIColor.lightGray]))
         return attributedText
+    }
+    
+    func configure() {
+        guard let viewModel = viewModel else {return}
+        nameLabel.text = viewModel.fullname
+        profileImageView.sd_setImage(with: viewModel.profileImageUrl)
+        
     }
 }

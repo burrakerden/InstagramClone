@@ -7,11 +7,17 @@
 
 import UIKit
 
+protocol AuthenticationDelegate: AnyObject {
+    func authenticationDidComplete()
+}
+
 class LoginController: UIViewController {
     
     //MARK: - Properties
     
     private var viewModel = LoginViewModel()
+    
+    weak var delegate: AuthenticationDelegate?
     
     private let iconImage: UIImageView = {
         let iv = UIImageView()
@@ -99,7 +105,7 @@ class LoginController: UIViewController {
                 print("DEBUG: Failed to login user \(error.localizedDescription)")
                 return
             }
-            self.dismiss(animated: true)
+            self.delegate?.authenticationDidComplete()
         }
        
     }
@@ -115,6 +121,7 @@ class LoginController: UIViewController {
     
     @objc func dontHaveAccountButtonTapped() {
         let vc = RegistrationController()
+        vc.delegate = delegate
         navigationController?.pushViewController(vc, animated: true)
     }
     

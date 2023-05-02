@@ -13,6 +13,7 @@ class RegistrationController: UIViewController {
     
     var viewModel = RegistrationViewModel()
     private var profileImage: UIImage?
+    weak var delegate: AuthenticationDelegate?
     
     private lazy var plusPhotoButton: UIButton = {
         let button = UIButton(type: .system)
@@ -101,9 +102,7 @@ class RegistrationController: UIViewController {
                 print("DEBUG: Failed to register user \(error.localizedDescription)")
                 return
             }
-            print("DEBUG: Succesfully registered user with firestore")
-            self.dismiss(animated: true)
-
+            self.delegate?.authenticationDidComplete()
         }
     }
     

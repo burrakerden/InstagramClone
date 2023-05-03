@@ -61,8 +61,8 @@ class LoginController: UIViewController {
         return button
     }()
     
-    //MARK: - Life Cycle
-    
+    //MARK: - Properties
+
     override func viewDidLoad() {
         super.viewDidLoad()
         configureUI()

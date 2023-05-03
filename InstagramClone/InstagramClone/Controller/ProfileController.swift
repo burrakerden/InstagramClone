@@ -78,7 +78,7 @@ extension ProfileController {
 
 //MARK: - UICollectionViewDelegateFlowLayout    (Sizing)
 
-extension ProfileController: UICollectionViewDelegateFlowLayout{
+extension ProfileController: UICollectionViewDelegateFlowLayout {
     
     // space between each cell
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {

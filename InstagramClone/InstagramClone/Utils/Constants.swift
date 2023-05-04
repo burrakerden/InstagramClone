@@ -7,9 +7,10 @@
 
 import Foundation
 import Firebase
+import FirebaseAuth
 
 let COLLECTION_USERS = Firestore.firestore().collection("users")
 
-struct Constans {
-    
-}
+let COLLECTION_FOLLOWERS = Firestore.firestore().collection("followers")
+
+let COLLECTION_FOLLOWING = Firestore.firestore().collection("following")

@@ -10,6 +10,10 @@ import UIKit
 import SDWebImage
 import SDWebImageSVGCoder
 
+protocol ProfileHeaderDelegate: AnyObject {
+    func header(_ profileHeader: ProfileHeader, didTapActionButtonFor User: User)
+}
+
 class ProfileHeader: UICollectionReusableView {
     
     //MARK: - Properties
@@ -17,6 +21,8 @@ class ProfileHeader: UICollectionReusableView {
     var viewModel: ProfileHeaderViewModel? {
         didSet { configure() }
     }
+    
+    weak var delegate: ProfileHeaderDelegate?
 
     private let profileImageView: UIImageView = {
         let iv = UIImageView()
@@ -58,7 +64,6 @@ class ProfileHeader: UICollectionReusableView {
     
     private lazy var editProfileFollowButton: UIButton = {
         let button = UIButton(type: .system)
-        button.setTitle("Edit Profile", for: .normal)
         button.layer.cornerRadius = 3
         button.layer.borderColor = UIColor.lightGray.cgColor
         button.layer.borderWidth = 0.5
@@ -141,8 +146,8 @@ class ProfileHeader: UICollectionReusableView {
     //MARK: - Actions
     
     @objc func handleprofileFollowTapped() {
-        print("DEBUG: handleprofileFollowTapped")
-
+        guard let user = viewModel?.user else {return}
+        delegate?.header(self, didTapActionButtonFor: user)
     }
     
     @objc func handleGridButtonTapped() {
@@ -152,16 +157,18 @@ class ProfileHeader: UICollectionReusableView {
 
     //MARK: - Helpers
     
-    func attributedStatText(value: Int, label: String) -> NSAttributedString {
-        let attributedText = NSMutableAttributedString(string: "\(value)\n", attributes: [.font: UIFont.boldSystemFont(ofSize: 14)])
-        attributedText.append(NSAttributedString(string: label, attributes: [.font: UIFont.systemFont(ofSize: 14), .foregroundColor: UIColor.lightGray]))
-        return attributedText
-    }
-    
     func configure() {
         guard let viewModel = viewModel else {return}
         nameLabel.text = viewModel.fullname
         profileImageView.sd_setImage(with: viewModel.profileImageUrl)
-        
+        editProfileFollowButton.setTitle(viewModel.followButtonText, for: .normal)
+        editProfileFollowButton.backgroundColor = viewModel.followButtonBackgroundColor
+        editProfileFollowButton.setTitleColor(viewModel.followButtonTextColor, for: .normal)
+    }
+    
+    func attributedStatText(value: Int, label: String) -> NSAttributedString {
+        let attributedText = NSMutableAttributedString(string: "\(value)\n", attributes: [.font: UIFont.boldSystemFont(ofSize: 14)])
+        attributedText.append(NSAttributedString(string: label, attributes: [.font: UIFont.systemFont(ofSize: 14), .foregroundColor: UIColor.lightGray]))
+        return attributedText
     }
 }

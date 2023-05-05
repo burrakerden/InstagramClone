@@ -42,7 +42,6 @@ class ProfileHeader: UICollectionReusableView {
         let label = UILabel()
         label.numberOfLines = 2
         label.textAlignment = .center
-        label.attributedText = attributedStatText(value: 5, label: "Posts")
         return label
     }()
     
@@ -50,7 +49,6 @@ class ProfileHeader: UICollectionReusableView {
         let label = UILabel()
         label.numberOfLines = 2
         label.textAlignment = .center
-        label.attributedText = attributedStatText(value: 2, label: "Followers")
         return label
     }()
     
@@ -58,13 +56,13 @@ class ProfileHeader: UICollectionReusableView {
         let label = UILabel()
         label.numberOfLines = 2
         label.textAlignment = .center
-        label.attributedText = attributedStatText(value: 1, label: "Following")
         return label
     }()
     
     private lazy var editProfileFollowButton: UIButton = {
         let button = UIButton(type: .system)
         button.layer.cornerRadius = 3
+        button.setTitle("Loading", for: .normal)
         button.layer.borderColor = UIColor.lightGray.cgColor
         button.layer.borderWidth = 0.5
         button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 14)
@@ -164,11 +162,10 @@ class ProfileHeader: UICollectionReusableView {
         editProfileFollowButton.setTitle(viewModel.followButtonText, for: .normal)
         editProfileFollowButton.backgroundColor = viewModel.followButtonBackgroundColor
         editProfileFollowButton.setTitleColor(viewModel.followButtonTextColor, for: .normal)
+        postsLabel.attributedText = viewModel.numberOfPosts
+        followingLabel.attributedText = viewModel.numberOfFollowing
+        followersLabel.attributedText = viewModel.numberOfFollowers
+
     }
     
-    func attributedStatText(value: Int, label: String) -> NSAttributedString {
-        let attributedText = NSMutableAttributedString(string: "\(value)\n", attributes: [.font: UIFont.boldSystemFont(ofSize: 14)])
-        attributedText.append(NSAttributedString(string: label, attributes: [.font: UIFont.systemFont(ofSize: 14), .foregroundColor: UIColor.lightGray]))
-        return attributedText
-    }
 }

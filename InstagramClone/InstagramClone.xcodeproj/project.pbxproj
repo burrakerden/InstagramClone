@@ -43,6 +43,9 @@
 		969F094D2A01197700934463 /* SDWebImageSVGCoder in Frameworks */ = {isa = PBXBuildFile; productRef = 969F094C2A01197700934463 /* SDWebImageSVGCoder */; };
 		969F094F2A023C2700934463 /* UserCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 969F094E2A023C2700934463 /* UserCell.swift */; };
 		969F09512A026D1800934463 /* UserCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 969F09502A026D1800934463 /* UserCellViewModel.swift */; };
+		969F09542A04D91E00934463 /* YPImagePicker in Frameworks */ = {isa = PBXBuildFile; productRef = 969F09532A04D91E00934463 /* YPImagePicker */; };
+		969F09562A04E7BE00934463 /* UploadViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 969F09552A04E7BE00934463 /* UploadViewController.swift */; };
+		969F09582A051DBC00934463 /* InputTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 969F09572A051DBC00934463 /* InputTextView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -77,6 +80,8 @@
 		969F09462A01145A00934463 /* ProfileHeaderViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileHeaderViewModel.swift; sourceTree = "<group>"; };
 		969F094E2A023C2700934463 /* UserCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserCell.swift; sourceTree = "<group>"; };
 		969F09502A026D1800934463 /* UserCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserCellViewModel.swift; sourceTree = "<group>"; };
+		969F09552A04E7BE00934463 /* UploadViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadViewController.swift; sourceTree = "<group>"; };
+		969F09572A051DBC00934463 /* InputTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputTextView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -91,6 +96,7 @@
 				962EEDEF29E81D3700CDC449 /* FirebaseAuth in Frameworks */,
 				962EEDF729E81D3700CDC449 /* FirebaseStorage in Frameworks */,
 				962EEDF329E81D3700CDC449 /* FirebaseFirestoreSwift in Frameworks */,
+				969F09542A04D91E00934463 /* YPImagePicker in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -139,6 +145,7 @@
 			children = (
 				962EEDE229E04A1000CDC449 /* Extensions.swift */,
 				969F09422A0100A400934463 /* Constants.swift */,
+				969F09572A051DBC00934463 /* InputTextView.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -193,6 +200,7 @@
 				962EEDD429E0358A00CDC449 /* ImageSelectorController.swift */,
 				962EEDD629E0359500CDC449 /* NotificationController.swift */,
 				962EEDD829E0359F00CDC449 /* ProfileController.swift */,
+				969F09552A04E7BE00934463 /* UploadViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -230,6 +238,7 @@
 				962EEDF629E81D3700CDC449 /* FirebaseStorage */,
 				969F09492A01170900934463 /* SDWebImage */,
 				969F094C2A01197700934463 /* SDWebImageSVGCoder */,
+				969F09532A04D91E00934463 /* YPImagePicker */,
 			);
 			productName = InstagramClone;
 			productReference = 962EEDB129E0350800CDC449 /* InstagramClone.app */;
@@ -263,6 +272,7 @@
 				962EEDED29E81D3700CDC449 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 				969F09482A01170800934463 /* XCRemoteSwiftPackageReference "SDWebImage" */,
 				969F094B2A01197700934463 /* XCRemoteSwiftPackageReference "SDWebImageSVGCoder" */,
+				969F09522A04D91E00934463 /* XCRemoteSwiftPackageReference "YPImagePicker" */,
 			);
 			productRefGroup = 962EEDB229E0350800CDC449 /* Products */;
 			projectDirPath = "";
@@ -305,7 +315,9 @@
 				962EEDB529E0350800CDC449 /* AppDelegate.swift in Sources */,
 				969F09452A0102D700934463 /* User.swift in Sources */,
 				962EEDD929E0359F00CDC449 /* ProfileController.swift in Sources */,
+				969F09562A04E7BE00934463 /* UploadViewController.swift in Sources */,
 				969F09472A01145A00934463 /* ProfileHeaderViewModel.swift in Sources */,
+				969F09582A051DBC00934463 /* InputTextView.swift in Sources */,
 				969F09432A0100A400934463 /* Constants.swift in Sources */,
 				962EEDCF29E0354500CDC449 /* MainTabController.swift in Sources */,
 				969F09512A026D1800934463 /* UserCellViewModel.swift in Sources */,
@@ -560,6 +572,14 @@
 				kind = branch;
 			};
 		};
+		969F09522A04D91E00934463 /* XCRemoteSwiftPackageReference "YPImagePicker" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Yummypets/YPImagePicker.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.0.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -597,6 +617,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 969F094B2A01197700934463 /* XCRemoteSwiftPackageReference "SDWebImageSVGCoder" */;
 			productName = SDWebImageSVGCoder;
+		};
+		969F09532A04D91E00934463 /* YPImagePicker */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 969F09522A04D91E00934463 /* XCRemoteSwiftPackageReference "YPImagePicker" */;
+			productName = YPImagePicker;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

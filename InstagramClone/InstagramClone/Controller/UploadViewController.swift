@@ -7,15 +7,28 @@
 
 import UIKit
 
+protocol UploadViewControllerDelegate: AnyObject {
+    func controllerDidFinishUploadingPost(controller: UploadViewController)
+}
+
 class UploadViewController: UIViewController {
     
     //MARK: - Properties
+    
+    weak var delegate: UploadViewControllerDelegate?
+    
+    var currentUser: User?
+    
+    var selectedImage: UIImage? {
+        didSet {
+            photoImageView.image = selectedImage
+        }
+    }
     
     private let photoImageView: UIImageView = {
         let iv = UIImageView()
         iv.contentMode = .scaleAspectFill
         iv.clipsToBounds = true
-        iv.backgroundColor = .lightGray
         iv.layer.cornerRadius = 10
         return iv
     }()
@@ -80,7 +93,20 @@ class UploadViewController: UIViewController {
     }
     
     @objc func didTapDone() {
-        print("DEBUG: didtapdne")
+        guard let selectedImage else {return}
+        guard let currentUser else {return}
+        showLoader(true)        //indicator
+        
+        PostService.uploadPost(caption: captionTextView.text, image: selectedImage, user: currentUser) { error in
+            self.showLoader(false)      //indicator
+
+            if let error = error {
+                print("DEBUG: Failed to upload post \(error.localizedDescription)")
+                return
+            }
+            self.delegate?.controllerDidFinishUploadingPost(controller: self)
+        }
+        
     }
 }
 

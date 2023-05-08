@@ -46,6 +46,10 @@
 		969F09542A04D91E00934463 /* YPImagePicker in Frameworks */ = {isa = PBXBuildFile; productRef = 969F09532A04D91E00934463 /* YPImagePicker */; };
 		969F09562A04E7BE00934463 /* UploadViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 969F09552A04E7BE00934463 /* UploadViewController.swift */; };
 		969F09582A051DBC00934463 /* InputTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 969F09572A051DBC00934463 /* InputTextView.swift */; };
+		969F095A2A08D74C00934463 /* PostService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 969F09592A08D74C00934463 /* PostService.swift */; };
+		969F095D2A08E26200934463 /* JGProgressHUD in Frameworks */ = {isa = PBXBuildFile; productRef = 969F095C2A08E26200934463 /* JGProgressHUD */; };
+		969F095F2A08FFE900934463 /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = 969F095E2A08FFE900934463 /* Post.swift */; };
+		969F09612A0914AD00934463 /* PostViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 969F09602A0914AD00934463 /* PostViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -82,6 +86,9 @@
 		969F09502A026D1800934463 /* UserCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserCellViewModel.swift; sourceTree = "<group>"; };
 		969F09552A04E7BE00934463 /* UploadViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadViewController.swift; sourceTree = "<group>"; };
 		969F09572A051DBC00934463 /* InputTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputTextView.swift; sourceTree = "<group>"; };
+		969F09592A08D74C00934463 /* PostService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostService.swift; sourceTree = "<group>"; };
+		969F095E2A08FFE900934463 /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
+		969F09602A0914AD00934463 /* PostViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -96,6 +103,7 @@
 				962EEDEF29E81D3700CDC449 /* FirebaseAuth in Frameworks */,
 				962EEDF729E81D3700CDC449 /* FirebaseStorage in Frameworks */,
 				962EEDF329E81D3700CDC449 /* FirebaseFirestoreSwift in Frameworks */,
+				969F095D2A08E26200934463 /* JGProgressHUD in Frameworks */,
 				969F09542A04D91E00934463 /* YPImagePicker in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -156,6 +164,7 @@
 				969F093729F938D400934463 /* ImageUploader.swift */,
 				969F093929F938E100934463 /* AuthService.swift */,
 				969F093F2A00FD0F00934463 /* UserService.swift */,
+				969F09592A08D74C00934463 /* PostService.swift */,
 			);
 			path = API;
 			sourceTree = "<group>";
@@ -166,6 +175,7 @@
 				962EEDEB29E2F40F00CDC449 /* AuthenticationViewModel.swift */,
 				969F09462A01145A00934463 /* ProfileHeaderViewModel.swift */,
 				969F09502A026D1800934463 /* UserCellViewModel.swift */,
+				969F09602A0914AD00934463 /* PostViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -174,6 +184,7 @@
 			isa = PBXGroup;
 			children = (
 				969F09442A0102D700934463 /* User.swift */,
+				969F095E2A08FFE900934463 /* Post.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -239,6 +250,7 @@
 				969F09492A01170900934463 /* SDWebImage */,
 				969F094C2A01197700934463 /* SDWebImageSVGCoder */,
 				969F09532A04D91E00934463 /* YPImagePicker */,
+				969F095C2A08E26200934463 /* JGProgressHUD */,
 			);
 			productName = InstagramClone;
 			productReference = 962EEDB129E0350800CDC449 /* InstagramClone.app */;
@@ -273,6 +285,7 @@
 				969F09482A01170800934463 /* XCRemoteSwiftPackageReference "SDWebImage" */,
 				969F094B2A01197700934463 /* XCRemoteSwiftPackageReference "SDWebImageSVGCoder" */,
 				969F09522A04D91E00934463 /* XCRemoteSwiftPackageReference "YPImagePicker" */,
+				969F095B2A08E26200934463 /* XCRemoteSwiftPackageReference "JGProgressHUD" */,
 			);
 			productRefGroup = 962EEDB229E0350800CDC449 /* Products */;
 			projectDirPath = "";
@@ -302,6 +315,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				969F09612A0914AD00934463 /* PostViewModel.swift in Sources */,
 				962EEDEA29E2E60D00CDC449 /* CustomTextField.swift in Sources */,
 				969F093E29FAABF400934463 /* ProfileHeader.swift in Sources */,
 				962EEDB929E0350800CDC449 /* ViewController.swift in Sources */,
@@ -324,7 +338,9 @@
 				962EEDDD29E0402800CDC449 /* FeedController.swift in Sources */,
 				962EEDE329E04A1000CDC449 /* Extensions.swift in Sources */,
 				969F093829F938D400934463 /* ImageUploader.swift in Sources */,
+				969F095F2A08FFE900934463 /* Post.swift in Sources */,
 				969F093A29F938E100934463 /* AuthService.swift in Sources */,
+				969F095A2A08D74C00934463 /* PostService.swift in Sources */,
 				969F09402A00FD0F00934463 /* UserService.swift in Sources */,
 				969F093C29FAAB6500934463 /* ProfileCell.swift in Sources */,
 				962EEDB729E0350800CDC449 /* SceneDelegate.swift in Sources */,
@@ -580,6 +596,14 @@
 				minimumVersion = 5.0.0;
 			};
 		};
+		969F095B2A08E26200934463 /* XCRemoteSwiftPackageReference "JGProgressHUD" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/JonasGessner/JGProgressHUD.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.0.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -622,6 +646,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 969F09522A04D91E00934463 /* XCRemoteSwiftPackageReference "YPImagePicker" */;
 			productName = YPImagePicker;
+		};
+		969F095C2A08E26200934463 /* JGProgressHUD */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 969F095B2A08E26200934463 /* XCRemoteSwiftPackageReference "JGProgressHUD" */;
+			productName = JGProgressHUD;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

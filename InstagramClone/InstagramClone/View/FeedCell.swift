@@ -6,10 +6,15 @@
 //
 
 import UIKit
+import SDWebImage
 
 class FeedCell: UICollectionViewCell {
     
     //MARK: - Properties
+    
+    var viewModel: PostViewModel? {
+        didSet { configure() }
+    }
     
     private let profileImageView: UIImageView = {
         let iv = UIImageView()
@@ -35,7 +40,6 @@ class FeedCell: UICollectionViewCell {
         iv.contentMode = .scaleToFill
         iv.clipsToBounds = true
         iv.isUserInteractionEnabled = true
-        iv.image = UIImage(named: "venom-7")
         return iv
     }()
     
@@ -65,14 +69,12 @@ class FeedCell: UICollectionViewCell {
     
     private let likeLabel: UILabel = {
         var label = UILabel()
-        label.text = "1 like"
         label.font = UIFont.boldSystemFont(ofSize: 13)
         return label
     }()
     
     private let captionLabel: UILabel = {
         var label = UILabel()
-        label.text = "Some test for now"
         label.font = UIFont.systemFont(ofSize: 14)
         return label
     }()
@@ -138,6 +140,17 @@ class FeedCell: UICollectionViewCell {
     }
     
     //MARK: - Helpers
+    
+    func configure() {
+        guard let viewModel else {return}
+        captionLabel.text = viewModel.caption
+        postImageView.sd_setImage(with: viewModel.imageUrl)
+        likeLabel.text = viewModel.likes
+        profileImageView.sd_setImage(with: viewModel.userProfileImageUrl)
+        usernameButton.setTitle(viewModel.username, for: .normal)
+        postTimeLabel.text = "\(viewModel.date.dateValue())"
+        
+    }
     
     func configureActionButtons() {
         let stackView = UIStackView(arrangedSubviews: [likeButton, commentButton, shareButton])

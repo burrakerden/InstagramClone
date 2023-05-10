@@ -47,7 +47,11 @@ struct UserService {
             
             COLLECTION_FOLLOWING.document(uid).collection("user-following").getDocuments { snapshot, _ in
                 let followings = snapshot?.documents.count ?? 0
-                completion(UserStats(following: followings, followers: followers))
+                
+                COLLECTION_POSTS.whereField("ownerUid", isEqualTo: uid).getDocuments { snapshot, _ in
+                    let post = snapshot?.documents.count ?? 0
+                    completion(UserStats(following: followings, followers: followers, post: post))
+                }
             }
         }
         

@@ -10,7 +10,7 @@ import Firebase
 
 struct PostViewModel {
     
-    private let post: Post
+    let post: Post
     
     var imageUrl: URL? {
         return URL(string: post.imageUrl)

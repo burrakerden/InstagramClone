@@ -8,11 +8,11 @@
 import UIKit
 import Firebase
 
-let reuseIdentifier = "cell"
-
 class FeedController: UICollectionViewController {
     
     //MARK: - Properties
+    
+    let reuseIdentifier = "cell"
     
     private var posts = [Post]()
     var post: Post?
@@ -80,6 +80,7 @@ extension FeedController {
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! FeedCell
+        cell.delegate = self
         
         if let post = post {
             cell.viewModel = PostViewModel(post: post)
@@ -99,4 +100,15 @@ extension FeedController: UICollectionViewDelegateFlowLayout {
         height += 110 //60 for image 50 for buttons like comment
         return CGSize(width: width, height: height)
     }
+}
+
+//MARK: - FeedCellDelegate
+
+extension FeedController: FeedCellDelegate {
+    func cell(_ cell: FeedCell, wantsToShowCommentsFor post: Post) {
+        let controller = CommentsController(collectionViewLayout: UICollectionViewFlowLayout())
+        navigationController?.pushViewController(controller, animated: true)
+    }
+    
+    
 }

@@ -50,6 +50,8 @@
 		969F095D2A08E26200934463 /* JGProgressHUD in Frameworks */ = {isa = PBXBuildFile; productRef = 969F095C2A08E26200934463 /* JGProgressHUD */; };
 		969F095F2A08FFE900934463 /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = 969F095E2A08FFE900934463 /* Post.swift */; };
 		969F09612A0914AD00934463 /* PostViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 969F09602A0914AD00934463 /* PostViewModel.swift */; };
+		969F675F2A0D029900E9B19D /* CommentsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 969F675E2A0D029900E9B19D /* CommentsController.swift */; };
+		969F67612A0D071000E9B19D /* CommentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 969F67602A0D071000E9B19D /* CommentCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -89,6 +91,8 @@
 		969F09592A08D74C00934463 /* PostService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostService.swift; sourceTree = "<group>"; };
 		969F095E2A08FFE900934463 /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
 		969F09602A0914AD00934463 /* PostViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostViewModel.swift; sourceTree = "<group>"; };
+		969F675E2A0D029900E9B19D /* CommentsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentsController.swift; sourceTree = "<group>"; };
+		969F67602A0D071000E9B19D /* CommentCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -197,6 +201,7 @@
 				969F093B29FAAB6500934463 /* ProfileCell.swift */,
 				969F093D29FAABF400934463 /* ProfileHeader.swift */,
 				969F094E2A023C2700934463 /* UserCell.swift */,
+				969F67602A0D071000E9B19D /* CommentCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -212,6 +217,7 @@
 				962EEDD629E0359500CDC449 /* NotificationController.swift */,
 				962EEDD829E0359F00CDC449 /* ProfileController.swift */,
 				969F09552A04E7BE00934463 /* UploadViewController.swift */,
+				969F675E2A0D029900E9B19D /* CommentsController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -324,6 +330,7 @@
 				962EEDD529E0358A00CDC449 /* ImageSelectorController.swift in Sources */,
 				962EEDD729E0359500CDC449 /* NotificationController.swift in Sources */,
 				962EEDEC29E2F41000CDC449 /* AuthenticationViewModel.swift in Sources */,
+				969F675F2A0D029900E9B19D /* CommentsController.swift in Sources */,
 				969F094F2A023C2700934463 /* UserCell.swift in Sources */,
 				962EEDD329E0358000CDC449 /* SearchController.swift in Sources */,
 				962EEDB529E0350800CDC449 /* AppDelegate.swift in Sources */,
@@ -345,6 +352,7 @@
 				969F093C29FAAB6500934463 /* ProfileCell.swift in Sources */,
 				962EEDB729E0350800CDC449 /* SceneDelegate.swift in Sources */,
 				962EEDE829E2D68400CDC449 /* RegistrationController.swift in Sources */,
+				969F67612A0D071000E9B19D /* CommentCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

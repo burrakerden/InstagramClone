@@ -13,12 +13,39 @@ class CommentsController: UICollectionViewController {
     
     private let reuseIdentifier = "CommentCell"
     
+    private lazy var commnetInputView: CommentInputAccesoryView = {
+        let frame = CGRect(x: 0, y: 0, width: view.frame.width, height: 80)
+        let cv = CommentInputAccesoryView(frame: frame)
+        cv.backgroundColor = .white
+        return cv
+    }()
+    
     //MARK: - LifeCycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
         configureCollectionView()
+
     }
+    
+    override var inputAccessoryView: UIView? {
+        get {return commnetInputView}
+    }
+    
+    override var canBecomeFirstResponder: Bool {
+        return true
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        tabBarController?.tabBar.isHidden = true
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        tabBarController?.tabBar.isHidden = false
+    }
+    
     
     //MARK: - Helpers
     
@@ -26,6 +53,8 @@ class CommentsController: UICollectionViewController {
         title = "Comments"
         collectionView.backgroundColor = .white
         collectionView.register(CommentCell.self, forCellWithReuseIdentifier: reuseIdentifier)
+        collectionView.alwaysBounceVertical = true
+        collectionView.keyboardDismissMode = .interactive
     }
     
     //MARK: - Actions
@@ -41,7 +70,6 @@ extension CommentsController {
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! CommentCell
-        cell.backgroundColor = .systemRed
         return cell
     }
 }
@@ -51,6 +79,6 @@ extension CommentsController {
 
 extension CommentsController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: view.frame.width, height: view.frame.height / 12)
+        return CGSize(width: view.frame.width, height: 60)
     }
 }

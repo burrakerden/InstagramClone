@@ -16,6 +16,7 @@ class CommentsController: UICollectionViewController {
     private lazy var commnetInputView: CommentInputAccesoryView = {
         let frame = CGRect(x: 0, y: 0, width: view.frame.width, height: 80)
         let cv = CommentInputAccesoryView(frame: frame)
+        cv.delegate = self
         cv.backgroundColor = .white
         return cv
     }()
@@ -81,4 +82,14 @@ extension CommentsController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: view.frame.width, height: 60)
     }
+}
+
+//MARK: - CommentInputAccesoryViewDelegate
+
+extension CommentsController: CommentInputAccesoryViewDelegate {
+    func inputView(inputView: CommentInputAccesoryView, wantsToUploadComment comment: String) {
+        inputView.clearCommentTextView()
+    }
+    
+    
 }

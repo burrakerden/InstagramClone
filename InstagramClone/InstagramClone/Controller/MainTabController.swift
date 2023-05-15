@@ -13,7 +13,7 @@ class MainTabController: UITabBarController {
     
     //MARK: - Life Cycle
     
-    private var user: User? {
+    var user: User? {
         didSet {
             guard let user else {return}
             configVC(with: user)

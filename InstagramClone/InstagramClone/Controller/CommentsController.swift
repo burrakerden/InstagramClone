@@ -13,6 +13,8 @@ class CommentsController: UICollectionViewController {
     
     private let reuseIdentifier = "CommentCell"
     
+    var post: Post
+    
     private lazy var commnetInputView: CommentInputAccesoryView = {
         let frame = CGRect(x: 0, y: 0, width: view.frame.width, height: 80)
         let cv = CommentInputAccesoryView(frame: frame)
@@ -22,6 +24,15 @@ class CommentsController: UICollectionViewController {
     }()
     
     //MARK: - LifeCycle
+    
+    init(post: Post) {
+        self.post = post
+        super.init(collectionViewLayout: UICollectionViewFlowLayout())
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -88,7 +99,16 @@ extension CommentsController: UICollectionViewDelegateFlowLayout {
 
 extension CommentsController: CommentInputAccesoryViewDelegate {
     func inputView(inputView: CommentInputAccesoryView, wantsToUploadComment comment: String) {
-        inputView.clearCommentTextView()
+        guard let tab = self.tabBarController as? MainTabController else {return}
+        guard let user = tab.user else {return}
+        
+        showLoader(true)
+        
+        CommentService.uploadComment(comment: comment, postID: post.postId, user: user) { error in
+            self.showLoader(false)
+            inputView.clearCommentTextView()
+
+        }
     }
     
     

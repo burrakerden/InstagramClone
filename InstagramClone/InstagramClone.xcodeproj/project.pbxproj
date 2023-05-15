@@ -53,6 +53,7 @@
 		969F675F2A0D029900E9B19D /* CommentsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 969F675E2A0D029900E9B19D /* CommentsController.swift */; };
 		969F67612A0D071000E9B19D /* CommentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 969F67602A0D071000E9B19D /* CommentCell.swift */; };
 		969F67632A0D21D100E9B19D /* CommentInputAccesoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 969F67622A0D21D100E9B19D /* CommentInputAccesoryView.swift */; };
+		969F67652A1253DA00E9B19D /* CommentService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 969F67642A1253DA00E9B19D /* CommentService.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -95,6 +96,7 @@
 		969F675E2A0D029900E9B19D /* CommentsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentsController.swift; sourceTree = "<group>"; };
 		969F67602A0D071000E9B19D /* CommentCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentCell.swift; sourceTree = "<group>"; };
 		969F67622A0D21D100E9B19D /* CommentInputAccesoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentInputAccesoryView.swift; sourceTree = "<group>"; };
+		969F67642A1253DA00E9B19D /* CommentService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentService.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -171,6 +173,7 @@
 				969F093929F938E100934463 /* AuthService.swift */,
 				969F093F2A00FD0F00934463 /* UserService.swift */,
 				969F09592A08D74C00934463 /* PostService.swift */,
+				969F67642A1253DA00E9B19D /* CommentService.swift */,
 			);
 			path = API;
 			sourceTree = "<group>";
@@ -333,6 +336,7 @@
 				962EEDD529E0358A00CDC449 /* ImageSelectorController.swift in Sources */,
 				962EEDD729E0359500CDC449 /* NotificationController.swift in Sources */,
 				962EEDEC29E2F41000CDC449 /* AuthenticationViewModel.swift in Sources */,
+				969F67652A1253DA00E9B19D /* CommentService.swift in Sources */,
 				969F675F2A0D029900E9B19D /* CommentsController.swift in Sources */,
 				969F094F2A023C2700934463 /* UserCell.swift in Sources */,
 				962EEDD329E0358000CDC449 /* SearchController.swift in Sources */,

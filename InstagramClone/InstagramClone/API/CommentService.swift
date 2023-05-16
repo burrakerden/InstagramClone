@@ -24,7 +24,19 @@ struct CommentService {
         
     }
     
-    static func fetchComment(uid: String, user: User, completion: @escaping(FirestoreCompletion)) {
+    static func fetchComment(postID: String, completion: @escaping([Comment]) -> Void) {
+        var comments = [Comment]()
+        let query = COLLECTION_POSTS.document(postID).collection("comments").order(by: "timestamp", descending: true)
+        query.addSnapshotListener { snapshot, error in
+            snapshot?.documentChanges.forEach({ change in
+                if change.type == .added {
+                    let data = change.document.data()
+                    let comment = Comment(dictionary: data)
+                    comments.append(comment)
+                }
+            })
+            completion(comments)
+        }
     }
 
 }

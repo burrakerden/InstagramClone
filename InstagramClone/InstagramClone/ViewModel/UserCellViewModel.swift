@@ -27,8 +27,4 @@ struct UserCellViewModel {
         return user.fullname
     }
     
-    
-//    init(user: User) {
-//        self.user = user
-//    }
 }

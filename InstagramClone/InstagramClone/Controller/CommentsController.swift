@@ -15,6 +15,8 @@ class CommentsController: UICollectionViewController {
     
     var post: Post
     
+    private var comments = [Comment]()
+    
     private lazy var commnetInputView: CommentInputAccesoryView = {
         let frame = CGRect(x: 0, y: 0, width: view.frame.width, height: 80)
         let cv = CommentInputAccesoryView(frame: frame)
@@ -37,6 +39,7 @@ class CommentsController: UICollectionViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         configureCollectionView()
+        fetchComments()
 
     }
     
@@ -58,6 +61,14 @@ class CommentsController: UICollectionViewController {
         tabBarController?.tabBar.isHidden = false
     }
     
+    //MARK: - API
+    
+    func fetchComments() {
+        CommentService.fetchComment(postID: post.postId) { comments in
+            self.comments = comments
+            self.collectionView.reloadData()
+        }
+    }
     
     //MARK: - Helpers
     
@@ -77,11 +88,12 @@ class CommentsController: UICollectionViewController {
 
 extension CommentsController {
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 5
+        return comments.count
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! CommentCell
+        cell.viewModel = CommentViewModel(comment: comments[indexPath.row])
         return cell
     }
 }
@@ -91,8 +103,12 @@ extension CommentsController {
 
 extension CommentsController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: view.frame.width, height: 60)
+        let viewModel = CommentViewModel(comment: comments[indexPath.row])
+        let height = viewModel.size(widht: view.frame.width).height 
+        return CGSize(width: view.frame.width, height: height)
     }
+    
+    
 }
 
 //MARK: - CommentInputAccesoryViewDelegate

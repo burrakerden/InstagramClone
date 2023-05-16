@@ -54,6 +54,8 @@
 		969F67612A0D071000E9B19D /* CommentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 969F67602A0D071000E9B19D /* CommentCell.swift */; };
 		969F67632A0D21D100E9B19D /* CommentInputAccesoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 969F67622A0D21D100E9B19D /* CommentInputAccesoryView.swift */; };
 		969F67652A1253DA00E9B19D /* CommentService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 969F67642A1253DA00E9B19D /* CommentService.swift */; };
+		969F67672A138A1800E9B19D /* Comment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 969F67662A138A1800E9B19D /* Comment.swift */; };
+		969F67692A1391BD00E9B19D /* CommentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 969F67682A1391BD00E9B19D /* CommentViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -97,6 +99,8 @@
 		969F67602A0D071000E9B19D /* CommentCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentCell.swift; sourceTree = "<group>"; };
 		969F67622A0D21D100E9B19D /* CommentInputAccesoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentInputAccesoryView.swift; sourceTree = "<group>"; };
 		969F67642A1253DA00E9B19D /* CommentService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentService.swift; sourceTree = "<group>"; };
+		969F67662A138A1800E9B19D /* Comment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Comment.swift; sourceTree = "<group>"; };
+		969F67682A1391BD00E9B19D /* CommentViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -185,6 +189,7 @@
 				969F09462A01145A00934463 /* ProfileHeaderViewModel.swift */,
 				969F09502A026D1800934463 /* UserCellViewModel.swift */,
 				969F09602A0914AD00934463 /* PostViewModel.swift */,
+				969F67682A1391BD00E9B19D /* CommentViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -194,6 +199,7 @@
 			children = (
 				969F09442A0102D700934463 /* User.swift */,
 				969F095E2A08FFE900934463 /* Post.swift */,
+				969F67662A138A1800E9B19D /* Comment.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -327,6 +333,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				969F67692A1391BD00E9B19D /* CommentViewModel.swift in Sources */,
 				969F09612A0914AD00934463 /* PostViewModel.swift in Sources */,
 				962EEDEA29E2E60D00CDC449 /* CustomTextField.swift in Sources */,
 				969F093E29FAABF400934463 /* ProfileHeader.swift in Sources */,
@@ -337,6 +344,7 @@
 				962EEDD729E0359500CDC449 /* NotificationController.swift in Sources */,
 				962EEDEC29E2F41000CDC449 /* AuthenticationViewModel.swift in Sources */,
 				969F67652A1253DA00E9B19D /* CommentService.swift in Sources */,
+				969F67672A138A1800E9B19D /* Comment.swift in Sources */,
 				969F675F2A0D029900E9B19D /* CommentsController.swift in Sources */,
 				969F094F2A023C2700934463 /* UserCell.swift in Sources */,
 				962EEDD329E0358000CDC449 /* SearchController.swift in Sources */,

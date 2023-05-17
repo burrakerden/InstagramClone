@@ -8,7 +8,7 @@
 import Foundation
 import Firebase
 
-struct Post {
+class Post {
     let caption: String
     let imageUrl: String
     let likes: Int
@@ -17,6 +17,8 @@ struct Post {
     let postId: String
     let ownerImageUrl: String
     let ownerUsername: String
+    
+    var didLike = false
     
     init(postId: String, dictionary: [String: Any]) {
         self.postId = postId

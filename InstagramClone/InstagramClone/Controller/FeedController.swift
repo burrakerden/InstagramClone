@@ -110,5 +110,29 @@ extension FeedController: FeedCellDelegate {
         navigationController?.pushViewController(controller, animated: true)
     }
     
+    func cell(_ cell: FeedCell, didLike post: Post) {
+        print(post.ownerUsername)
+        cell.viewModel?.post.didLike.toggle()
+        if !post.didLike {
+            PostService.unlikePost(post: post) { err in
+                if let err = err {
+                    print("DEBUG: \(err.localizedDescription)")
+                } else {
+                    cell.likeButton.setImage(UIImage(named: "like_unselected"), for: .normal)
+                    cell.likeButton.tintColor = .black
+                }
+            }
+        } else {
+            PostService.likePost(post: post) { err in
+                if let err = err {
+                    print("DEBUG: \(err.localizedDescription)")
+                } else {
+                    cell.likeButton.setImage(UIImage(named: "like_selected"), for: .normal)
+                    cell.likeButton.tintColor = .systemRed
+                }
+            }
+        }
+    }
+    
     
 }

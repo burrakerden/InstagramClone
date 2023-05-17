@@ -30,7 +30,6 @@ class CommentCell: UICollectionViewCell {
         button.setTitleColor(.black, for: .normal)
         button.setTitle("venom", for: .normal)
         button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 13)
-        button.addTarget(self, action: #selector(didTapUsername), for: .touchUpInside)
         return button
     }()
     
@@ -43,7 +42,7 @@ class CommentCell: UICollectionViewCell {
     }()
     
     
-
+    
     //MARK: - LifeCycle
     
     override init(frame: CGRect) {
@@ -54,18 +53,10 @@ class CommentCell: UICollectionViewCell {
         
         profileImageView.anchor(top: topAnchor, left: leftAnchor, paddingTop: 12, paddingLeft: 8)
         profileImageView.setDimensions(height: 40, width: 40)
-
-        
-//        profileImageView.centerY(inView: self, leftAnchor: leftAnchor, paddingLeft: 8)
         
         usernameButton.anchor(top: topAnchor, left: profileImageView.rightAnchor, paddingTop: 6, paddingLeft: 8)
         
-//        usernameButton.centerY(inView: self, leftAnchor: profileImageView.rightAnchor, paddingLeft: 6)
-        
         commentLabel.anchor(top: usernameButton.bottomAnchor, left: usernameButton.leftAnchor, right: rightAnchor, paddingTop: -4, paddingRight: 6)
-        
-//        commentLabel.centerY(inView: self, leftAnchor: usernameButton.rightAnchor, paddingLeft: 6)
-//        commentLabel.anchor(right: rightAnchor, paddingRight: 6)
     }
     
     required init?(coder: NSCoder) {
@@ -86,10 +77,7 @@ class CommentCell: UICollectionViewCell {
         layoutAttributes.frame.size = contentView.systemLayoutSizeFitting(targetSize, withHorizontalFittingPriority: .required, verticalFittingPriority: .fittingSizeLevel)
         return layoutAttributes
     }
-
+    
     //MARK: - Actions
-    @objc func didTapUsername() {
-        let controller = ProfileController(user: <#T##User#>)
-        navigationController?.pushViewController(controller, animated: true)
-    }
+    
 }

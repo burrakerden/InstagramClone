@@ -11,7 +11,7 @@ import Firebase
 class Post {
     let caption: String
     let imageUrl: String
-    let likes: Int
+    var likes: Int
     let ownerUid: String
     let timestamp: Timestamp
     let postId: String

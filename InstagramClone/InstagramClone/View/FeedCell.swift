@@ -162,11 +162,12 @@ class FeedCell: UICollectionViewCell {
         guard let viewModel else {return}
         captionLabel.text = viewModel.caption
         postImageView.sd_setImage(with: viewModel.imageUrl)
-        likeLabel.text = viewModel.likes
         profileImageView.sd_setImage(with: viewModel.userProfileImageUrl)
         usernameButton.setTitle(viewModel.username, for: .normal)
-        postTimeLabel.text = "\(viewModel.date.dateValue())"
-        
+//        postTimeLabel.text = "\(viewModel.date.dateValue())"
+        likeLabel.text = viewModel.likes
+        likeButton.tintColor = viewModel.likeButtonTintColor
+        likeButton.setImage(viewModel.likeButtonImage, for: .normal)
     }
     
     func configureActionButtons() {

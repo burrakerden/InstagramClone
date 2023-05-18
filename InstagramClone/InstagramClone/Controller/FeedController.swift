@@ -14,7 +14,10 @@ class FeedController: UICollectionViewController {
     
     let reuseIdentifier = "cell"
     
-    private var posts = [Post]()
+    private var posts = [Post]() {
+        didSet { collectionView.reloadData() }
+    }
+    
     var post: Post?
     
     override func viewDidLoad() {
@@ -44,7 +47,19 @@ class FeedController: UICollectionViewController {
         PostService.fetchPosts { posts in
             self.posts = posts
             self.collectionView.refreshControl?.endRefreshing()
-            self.collectionView.reloadData()
+            self.checkIfUserLikedPosts()
+        }
+    }
+    
+    func checkIfUserLikedPosts() {
+        self.posts.forEach { post in
+            PostService.checkIfUserLikePost(post: post) { didLike in
+                
+                print("DEBUG: \(post.caption) - ----- --  \(didLike)")
+                if let index = self.posts.firstIndex(where: { $0.postId == post.postId }) {
+                    self.posts[index].didLike = didLike
+                }
+            }
         }
     }
     
@@ -52,7 +67,7 @@ class FeedController: UICollectionViewController {
     
     @objc func handleLogout() {
         do {
-           try Auth.auth().signOut()
+            try Auth.auth().signOut()
             let controller = LoginController()
             controller.delegate = self.tabBarController as? MainTabController
             let nav = UINavigationController(rootViewController: controller)
@@ -111,25 +126,21 @@ extension FeedController: FeedCellDelegate {
     }
     
     func cell(_ cell: FeedCell, didLike post: Post) {
-        print(post.ownerUsername)
         cell.viewModel?.post.didLike.toggle()
-        if !post.didLike {
-            PostService.unlikePost(post: post) { err in
-                if let err = err {
-                    print("DEBUG: \(err.localizedDescription)")
-                } else {
-                    cell.likeButton.setImage(UIImage(named: "like_unselected"), for: .normal)
-                    cell.likeButton.tintColor = .black
-                }
+        
+        if post.didLike {
+            PostService.likePost(post: post) { err in
+                cell.likeButton.setImage(UIImage(named: "like_selected"), for: .normal)
+                cell.likeButton.tintColor = .systemRed
+                cell.viewModel?.post.likes = post.likes + 1
+                self.collectionView.reloadData()
             }
         } else {
-            PostService.likePost(post: post) { err in
-                if let err = err {
-                    print("DEBUG: \(err.localizedDescription)")
-                } else {
-                    cell.likeButton.setImage(UIImage(named: "like_selected"), for: .normal)
-                    cell.likeButton.tintColor = .systemRed
-                }
+            PostService.unlikePost(post: post) { err in
+                cell.likeButton.setImage(UIImage(named: "like_unselected"), for: .normal)
+                cell.likeButton.tintColor = .black
+                cell.viewModel?.post.likes = post.likes - 1
+                self.collectionView.reloadData()
             }
         }
     }

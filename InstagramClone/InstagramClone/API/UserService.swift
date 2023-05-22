@@ -14,14 +14,10 @@ struct UserService {
     
     static func fetchUserWithUid(uid: String, completion: @escaping(User) -> Void) {
         COLLECTION_USERS.document(uid).getDocument { snapshot, error in
-            
             guard let dictionary = snapshot?.data() else {return}
-            
             let user = User(dictionary: dictionary)
             completion(user)
-            
         }
-        
     }
     
     static func fetchUsers(completion: @escaping([User]) -> Void) {
@@ -59,6 +55,7 @@ struct UserService {
     
     static func follow(uid: String, completion: @escaping(FirestoreCompletion)) {
         guard let currentUid = Auth.auth().currentUser?.uid else {return}
+        
         COLLECTION_FOLLOWING.document(currentUid).collection("user-following").document(uid).setData([:]) { error in
             COLLECTION_FOLLOWERS.document(uid).collection("user-followers").document(currentUid).setData([:], completion: completion)
         }
@@ -66,6 +63,7 @@ struct UserService {
     
     static func unfollow(uid: String, completion: @escaping(FirestoreCompletion)) {
         guard let currentUid = Auth.auth().currentUser?.uid else {return}
+        
         COLLECTION_FOLLOWING.document(currentUid).collection("user-following").document(uid).delete() { error in
             if let error = error {
                 print("Error removing document: \(error.localizedDescription)")

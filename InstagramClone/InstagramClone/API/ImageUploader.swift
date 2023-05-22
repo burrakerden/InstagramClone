@@ -25,8 +25,6 @@ struct ImageUploader {
                 guard let imageURL = url?.absoluteString else {return}
                 completion(imageURL)
             }
-            
-            
         }
     }
 }

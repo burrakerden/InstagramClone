@@ -11,6 +11,7 @@ import SDWebImage
 protocol FeedCellDelegate: AnyObject {
     func cell(_ cell: FeedCell, wantsToShowCommentsFor post: Post)
     func cell(_ cell: FeedCell, didLike post: Post)
+    func cell(_ cell: FeedCell, watsToPushProfile post: Post)
 }
 
 class FeedCell: UICollectionViewCell {
@@ -23,22 +24,24 @@ class FeedCell: UICollectionViewCell {
         didSet { configure() }
     }
     
-    private let profileImageView: UIImageView = {
+    private lazy var profileImageView: UIImageView = {
         let iv = UIImageView()
         iv.contentMode = .scaleToFill
         iv.clipsToBounds = true
         iv.isUserInteractionEnabled = true
-        iv.image = UIImage(named: "venom-7")
         iv.layer.cornerRadius = 20
+        
+        let recognizer = UITapGestureRecognizer(target: self, action: #selector(showUserProfile))
+        iv.addGestureRecognizer(recognizer)
+        
         return iv
     }()
     
     private lazy var usernameButton: UIButton = {
         let button = UIButton(type: .system)
         button.setTitleColor(.black, for: .normal)
-        button.setTitle("venom", for: .normal)
         button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 13)
-        button.addTarget(self, action: #selector(didTapUsername), for: .touchUpInside)
+        button.addTarget(self, action: #selector(showUserProfile), for: .touchUpInside)
         return button
     }()
     
@@ -142,8 +145,9 @@ class FeedCell: UICollectionViewCell {
     
     //MARK: - Actions
     
-    @objc func didTapUsername() {
-        print("didTapUsername")
+    @objc func showUserProfile() {
+        guard let viewModel else {return}
+        delegate?.cell(self, watsToPushProfile: viewModel.post)
     }
     
     @objc func didTapComments() {

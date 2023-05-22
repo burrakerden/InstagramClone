@@ -24,7 +24,6 @@ struct PostService {
             
             COLLECTION_POSTS.addDocument(data: data, completion: completion)
         }
-        
     }
     
     static func fetchPosts(completion: @escaping([Post]) -> Void) {
@@ -32,7 +31,6 @@ struct PostService {
             guard let documents = snapshot?.documents else {return}
             let posts = documents.map({ Post(postId: $0.documentID, dictionary: $0.data())})
             completion(posts)
-            
         }
     }
     
@@ -45,7 +43,6 @@ struct PostService {
             posts.sort { ( post1, post2) -> Bool in
                 return post1.timestamp.seconds > post2.timestamp.seconds
             }
-            
             completion(posts)
         }
     }
@@ -57,7 +54,6 @@ struct PostService {
         COLLECTION_POSTS.document(post.postId).collection("post-likes").document(uid).setData([:]) { _ in
             COLLECTION_USERS.document(uid).collection("user-likes").document(post.postId).setData([:], completion: completion)
         }
-        
     }
     
     static func unlikePost(post: Post, completion: @escaping(FirestoreCompletion)) {
@@ -69,7 +65,6 @@ struct PostService {
         COLLECTION_POSTS.document(post.postId).collection("post-likes").document(uid).delete { _ in
             COLLECTION_USERS.document(uid).collection("user-likes").document(post.postId).delete(completion: completion)
         }
-
     }
     
     static func checkIfUserLikePost(post: Post, completion: @escaping(Bool) -> Void) {

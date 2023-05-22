@@ -120,6 +120,14 @@ extension FeedController: UICollectionViewDelegateFlowLayout {
 //MARK: - FeedCellDelegate
 
 extension FeedController: FeedCellDelegate {
+
+    func cell(_ cell: FeedCell, watsToPushProfile post: Post) {
+        UserService.fetchUserWithUid(uid: post.ownerUid) { user in
+                    let controller = ProfileController(user: user)
+                    self.navigationController?.pushViewController(controller, animated: true)
+                }
+    }
+    
     func cell(_ cell: FeedCell, wantsToShowCommentsFor post: Post) {
         let controller = CommentsController(post: post)
         navigationController?.pushViewController(controller, animated: true)

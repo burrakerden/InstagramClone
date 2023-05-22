@@ -21,7 +21,6 @@ struct CommentService {
                                         
             
         COLLECTION_POSTS.document(postID).collection("comments").addDocument(data: data, completion: completion)
-        
     }
     
     static func fetchComment(postID: String, completion: @escaping([Comment]) -> Void) {

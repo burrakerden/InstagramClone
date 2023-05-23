@@ -7,23 +7,44 @@
 
 import UIKit
 
-class NotificationController: UIViewController {
+private let reuseIdentifier = "NotificationCell"
 
+class NotificationController: UITableViewController {
+
+    //MARK: - Properties
+    
+    
+    //MARK: - Lifecycle
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        configureTableView()
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    //MARK: - Helpers
+    
+    func configureTableView() {
+        view.backgroundColor = .white
+        navigationItem.title = "Notifications"
+        tableView.register(NotificationCell.self, forCellReuseIdentifier: reuseIdentifier)
+        tableView.rowHeight = 80
+        tableView.separatorStyle = .none
     }
-    */
 
+    //MARK: - Actions
+    
+
+    
+
+}
+
+extension NotificationController {
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 10
+    }
+    
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: reuseIdentifier, for: indexPath) as! NotificationCell
+        return cell
+    }
 }

@@ -11,7 +11,7 @@ import UIKit
 class NotificationCell: UITableViewCell {
     
     //MARK: - Properties
-    
+        
     private let profileImageView: UIImageView = {
         let iv = UIImageView()
         iv.contentMode = .scaleAspectFill

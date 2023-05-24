@@ -142,6 +142,8 @@ extension FeedController: FeedCellDelegate {
                 cell.likeButton.tintColor = .systemRed
                 cell.viewModel?.post.likes = post.likes + 1
                 self.collectionView.reloadData()
+                
+                NotificationService.uploadNotification(toUid: post.ownerUid, type: .like, post: post)
             }
         } else {
             PostService.unlikePost(post: post) { err in

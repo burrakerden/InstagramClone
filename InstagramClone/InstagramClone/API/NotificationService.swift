@@ -10,22 +10,28 @@ import Firebase
 
 struct NotificationService {
     
-    static func uploadNotification(toUid uid: String, type: NotifiationType, post: Post? = nil) {
+    static func uploadNotification(toUid uid: String, type: NotifiationType, forUser: User, post: Post? = nil) {
         guard let currentUid = Auth.auth().currentUser?.uid else {return}
         guard uid != currentUid else {return}
         
-        let docRef =  COLLECTION_NOTIFICATIONS.document(uid).collection("user-notifications").document()
-        
-        var data: [String: Any] = ["timestamp": Timestamp(date: Date()),
-                                   "uid": currentUid,
-                                   "type": type.rawValue,
-                                   "id" : docRef.documentID]
-        if let post = post {
-            data["postId"] = post.postId                // ----> how to add item to data
-            data["postImageUrl"] = post.imageUrl
-        }
+//        UserService.fetchUserWithUid(uid: currentUid) { user in
+            let docRef =  COLLECTION_NOTIFICATIONS.document(uid).collection("user-notifications").document()
             
-        docRef.setData(data)
+            var data: [String: Any] = ["timestamp": Timestamp(date: Date()),
+                                       "uid": currentUid,
+                                       "type": type.rawValue,
+                                       "id" : docRef.documentID,
+                                       "userProfileImageUrl": forUser.profileImageURL,
+                                       "username": forUser.username]
+            if let post = post {
+                data["postId"] = post.postId                // ----> how to add item to data
+                data["postImageUrl"] = post.imageUrl
+            }
+                
+            docRef.setData(data)
+//        }
+        
+
     }
     
     static func fetchNotification(completion: @escaping([Notification]) -> Void) {

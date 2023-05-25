@@ -5,13 +5,17 @@
 //  Created by Burak Erden on 22.05.2023.
 //
 
-import Foundation
 import UIKit
+import SDWebImage
 
 class NotificationCell: UITableViewCell {
     
     //MARK: - Properties
         
+    var viewModel: NotificationViewModel? {
+        didSet {configureUI()}
+    }
+    
     private let profileImageView: UIImageView = {
         let iv = UIImageView()
         iv.contentMode = .scaleAspectFill
@@ -23,7 +27,7 @@ class NotificationCell: UITableViewCell {
     private let infoLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.boldSystemFont(ofSize: 12)
-        label.text = "burak"
+        label.numberOfLines = 0
         return label
     }()
     
@@ -82,6 +86,16 @@ class NotificationCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
+    //MARK: - Helpers
+    
+    func configureUI() {
+        guard let viewModel else {return}
+        profileImageView.sd_setImage(with: viewModel.profileImageUrl)
+        postImageView.sd_setImage(with: viewModel.postImageUrl)
+        infoLabel.attributedText = viewModel.notificationMessage
+        
+        print("DEBUG: nofication vm")
+    }
     
     
     //MARK: - Actions

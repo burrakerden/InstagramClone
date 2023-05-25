@@ -59,6 +59,7 @@
 		96CDD7F22A1B9A9C00493FF2 /* NotificationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96CDD7F12A1B9A9C00493FF2 /* NotificationCell.swift */; };
 		96CDD7F42A1CA85300493FF2 /* Notification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96CDD7F32A1CA85300493FF2 /* Notification.swift */; };
 		96CDD7F62A1CB11500493FF2 /* NotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96CDD7F52A1CB11500493FF2 /* NotificationService.swift */; };
+		96CDD7F82A1DE0F400493FF2 /* NotificationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96CDD7F72A1DE0F400493FF2 /* NotificationViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -107,6 +108,7 @@
 		96CDD7F12A1B9A9C00493FF2 /* NotificationCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationCell.swift; sourceTree = "<group>"; };
 		96CDD7F32A1CA85300493FF2 /* Notification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notification.swift; sourceTree = "<group>"; };
 		96CDD7F52A1CB11500493FF2 /* NotificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationService.swift; sourceTree = "<group>"; };
+		96CDD7F72A1DE0F400493FF2 /* NotificationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -197,6 +199,7 @@
 				969F09502A026D1800934463 /* UserCellViewModel.swift */,
 				969F09602A0914AD00934463 /* PostViewModel.swift */,
 				969F67682A1391BD00E9B19D /* CommentViewModel.swift */,
+				96CDD7F72A1DE0F400493FF2 /* NotificationViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -343,6 +346,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				969F67692A1391BD00E9B19D /* CommentViewModel.swift in Sources */,
+				96CDD7F82A1DE0F400493FF2 /* NotificationViewModel.swift in Sources */,
 				969F09612A0914AD00934463 /* PostViewModel.swift in Sources */,
 				962EEDEA29E2E60D00CDC449 /* CustomTextField.swift in Sources */,
 				969F093E29FAABF400934463 /* ProfileHeader.swift in Sources */,

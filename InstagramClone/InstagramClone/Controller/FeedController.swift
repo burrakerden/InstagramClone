@@ -54,8 +54,6 @@ class FeedController: UICollectionViewController {
     func checkIfUserLikedPosts() {
         self.posts.forEach { post in
             PostService.checkIfUserLikePost(post: post) { didLike in
-                
-                print("DEBUG: \(post.caption) - ----- --  \(didLike)")
                 if let index = self.posts.firstIndex(where: { $0.postId == post.postId }) {
                     self.posts[index].didLike = didLike
                 }
@@ -134,25 +132,28 @@ extension FeedController: FeedCellDelegate {
     }
     
     func cell(_ cell: FeedCell, didLike post: Post) {
-        cell.viewModel?.post.didLike.toggle()
+        
+        guard let tab = self.tabBarController as? MainTabController else {return}
+        guard let user = tab.user else {return}
         
         if post.didLike {
-            PostService.likePost(post: post) { err in
-                cell.likeButton.setImage(UIImage(named: "like_selected"), for: .normal)
-                cell.likeButton.tintColor = .systemRed
-                cell.viewModel?.post.likes = post.likes + 1
-                self.collectionView.reloadData()
-                
-                NotificationService.uploadNotification(toUid: post.ownerUid, type: .like, post: post)
-            }
-        } else {
-            PostService.unlikePost(post: post) { err in
+            PostService.unlikePost(post: post) { _ in
                 cell.likeButton.setImage(UIImage(named: "like_unselected"), for: .normal)
                 cell.likeButton.tintColor = .black
                 cell.viewModel?.post.likes = post.likes - 1
                 self.collectionView.reloadData()
             }
+        } else {
+            PostService.likePost(post: post) { _ in
+                cell.likeButton.setImage(UIImage(named: "like_selected"), for: .normal)
+                cell.likeButton.tintColor = .systemRed
+                cell.viewModel?.post.likes = post.likes + 1
+                self.collectionView.reloadData()
+                NotificationService.uploadNotification(toUid: post.ownerUid, type: .like, forUser: user, post: post)
+            }
         }
+        cell.viewModel?.post.didLike.toggle()
+
     }
     
     

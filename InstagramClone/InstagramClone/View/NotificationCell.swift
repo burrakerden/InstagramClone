@@ -8,9 +8,17 @@
 import UIKit
 import SDWebImage
 
+protocol NotificationCellDelegate: AnyObject {
+    func cell(_ cell: NotificationCell, wantsToFollow uid: String)
+    func cell(_ cell: NotificationCell, wantsToUnfollow uid: String)
+    func cell(_ cell: NotificationCell, wantsToViewPost postId: String)
+}
+
 class NotificationCell: UITableViewCell {
     
     //MARK: - Properties
+    
+    weak var delegate: NotificationCellDelegate?
         
     var viewModel: NotificationViewModel? {
         didSet {configureUI()}
@@ -59,6 +67,7 @@ class NotificationCell: UITableViewCell {
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
+        
         selectionStyle = .none
         
         addSubview(profileImageView)
@@ -77,9 +86,6 @@ class NotificationCell: UITableViewCell {
         addSubview(postImageView)
         postImageView.centerY(inView: self)
         postImageView.anchor(right: rightAnchor, paddingRight: 12, width: 40, height: 40)
-        
-        followButton.isHidden = true
-
     }
     
     required init?(coder: NSCoder) {
@@ -93,20 +99,22 @@ class NotificationCell: UITableViewCell {
         profileImageView.sd_setImage(with: viewModel.profileImageUrl)
         postImageView.sd_setImage(with: viewModel.postImageUrl)
         infoLabel.attributedText = viewModel.notificationMessage
-        
-        print("DEBUG: nofication vm")
+        postImageView.isHidden = viewModel.shouldHidePostImage
+        followButton.isHidden = !viewModel.shouldHidePostImage
+        viewModel.shouldHidePostImage ? infoLabel.anchor(right: rightAnchor, paddingRight: 116) : infoLabel.anchor(right: rightAnchor, paddingRight: 56)
     }
     
     
     //MARK: - Actions
     
     @objc func handeFollowTapped() {
-        
+        guard let viewModel else {return}
+        delegate?.cell(self, wantsToFollow: viewModel.notification.uid)
     }
     
     @objc func handlePostTapped() {
-        //        guard let viewModel else {return}
-        //        delegate?.cell(self, watsToPushProfile: viewModel.post)
+        guard let postId = viewModel?.notification.postId else {return}
+        delegate?.cell(self, wantsToViewPost: postId)
     }
     
 }

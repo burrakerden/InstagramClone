@@ -9,7 +9,7 @@ import UIKit
 
 struct NotificationViewModel {
     
-    private let notification: Notification
+    let notification: Notification
     
     init(notification: Notification) {
         self.notification = notification
@@ -33,4 +33,6 @@ struct NotificationViewModel {
 
         return attributedText
     }
+    
+    var shouldHidePostImage: Bool {return notification.type == .follow}
 }

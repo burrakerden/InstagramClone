@@ -112,7 +112,7 @@ extension CommentsController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let viewModel = CommentViewModel(comment: comments[indexPath.row])
         let height = viewModel.size(widht: view.frame.width).height
-        return CGSize(width: view.frame.width, height: height)
+        return CGSize(width: view.frame.width, height: height + 20)
     }
     
     
@@ -123,13 +123,15 @@ extension CommentsController: UICollectionViewDelegateFlowLayout {
 extension CommentsController: CommentInputAccesoryViewDelegate {
     func inputView(inputView: CommentInputAccesoryView, wantsToUploadComment comment: String) {
         guard let tab = self.tabBarController as? MainTabController else {return}
-        guard let user = tab.user else {return}
+        guard let currentUser = tab.user else {return}
         
         showLoader(true)
         
-        CommentService.uploadComment(comment: comment, postID: post.postId, user: user) { error in
+        CommentService.uploadComment(comment: comment, postID: post.postId, user: currentUser) { error in
             self.showLoader(false)
             inputView.clearCommentTextView()
+            
+            NotificationService.uploadNotification(toUid: self.post.ownerUid, type: .comment, forUser: currentUser, post: self.post)
 
         }
     }

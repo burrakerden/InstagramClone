@@ -8,7 +8,7 @@
 import Foundation
 import Firebase
 
-class Post {
+struct Post {
     let caption: String
     let imageUrl: String
     var likes: Int

@@ -12,6 +12,8 @@ protocol NotificationCellDelegate: AnyObject {
     func cell(_ cell: NotificationCell, wantsToFollow uid: String)
     func cell(_ cell: NotificationCell, wantsToUnfollow uid: String)
     func cell(_ cell: NotificationCell, wantsToViewPost postId: String)
+    func cell(_ cell: NotificationCell, wantsToViewProfile uid: String)
+
 }
 
 class NotificationCell: UITableViewCell {
@@ -24,18 +26,24 @@ class NotificationCell: UITableViewCell {
         didSet {configureUI()}
     }
     
-    private let profileImageView: UIImageView = {
+    private lazy var profileImageView: UIImageView = {
         let iv = UIImageView()
         iv.contentMode = .scaleAspectFill
         iv.clipsToBounds = true
         iv.backgroundColor = .lightGray
+        iv.isUserInteractionEnabled = true
+        let recognizer = UITapGestureRecognizer(target: self, action: #selector(handleProfileImageTapped))
+        iv.addGestureRecognizer(recognizer)
         return iv
     }()
     
-    private let infoLabel: UILabel = {
+    private lazy var infoLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.boldSystemFont(ofSize: 12)
         label.numberOfLines = 0
+        label.isUserInteractionEnabled = true
+        let recognizer = UITapGestureRecognizer(target: self, action: #selector(handleProfileImageTapped))
+        label.addGestureRecognizer(recognizer)
         return label
     }()
     
@@ -70,20 +78,20 @@ class NotificationCell: UITableViewCell {
         
         selectionStyle = .none
         
-        addSubview(profileImageView)
+        contentView.addSubview(profileImageView)
         profileImageView.anchor(left: leftAnchor, paddingLeft: 8)
         profileImageView.centerY(inView: self)
         profileImageView.setDimensions(height: 44, width: 44)
         profileImageView.layer.cornerRadius = 44 / 2
         
-        addSubview(infoLabel)
+        contentView.addSubview(infoLabel)
         infoLabel.centerY(inView: profileImageView, leftAnchor: profileImageView.rightAnchor, paddingLeft: 8)
         
-        addSubview(followButton)
+        contentView.addSubview(followButton)
         followButton.centerY(inView: self)
         followButton.anchor(right: rightAnchor, paddingRight: 12, width: 100, height: 32)
         
-        addSubview(postImageView)
+        contentView.addSubview(postImageView)
         postImageView.centerY(inView: self)
         postImageView.anchor(right: rightAnchor, paddingRight: 12, width: 40, height: 40)
     }
@@ -102,6 +110,9 @@ class NotificationCell: UITableViewCell {
         postImageView.isHidden = viewModel.shouldHidePostImage
         followButton.isHidden = !viewModel.shouldHidePostImage
         viewModel.shouldHidePostImage ? infoLabel.anchor(right: rightAnchor, paddingRight: 116) : infoLabel.anchor(right: rightAnchor, paddingRight: 56)
+        followButton.setTitle(viewModel.followButtonText, for: .normal)
+        followButton.backgroundColor = viewModel.followButtonBgColor
+        followButton.setTitleColor(viewModel.followButtonTextColor, for: .normal)
     }
     
     
@@ -109,12 +120,22 @@ class NotificationCell: UITableViewCell {
     
     @objc func handeFollowTapped() {
         guard let viewModel else {return}
-        delegate?.cell(self, wantsToFollow: viewModel.notification.uid)
+        if viewModel.notification.userIsFollowed {
+            delegate?.cell(self, wantsToUnfollow: viewModel.notification.uid)
+        } else {
+            delegate?.cell(self, wantsToFollow: viewModel.notification.uid)
+        }
+        
     }
     
     @objc func handlePostTapped() {
         guard let postId = viewModel?.notification.postId else {return}
         delegate?.cell(self, wantsToViewPost: postId)
+    }
+    
+    @objc func handleProfileImageTapped() {
+        guard let uid = viewModel?.notification.uid else {return}
+        delegate?.cell(self, wantsToViewProfile: uid)
     }
     
 }

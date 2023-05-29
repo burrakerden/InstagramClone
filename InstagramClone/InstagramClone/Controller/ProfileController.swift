@@ -58,6 +58,7 @@ class ProfileController: UICollectionViewController {
         PostService.fetchProfilePosts(uid: user.uid) { posts in
             self.posts = posts
             self.collectionView.reloadData()
+            self.collectionView.refreshControl?.endRefreshing()
         }
     }
     
@@ -68,10 +69,18 @@ class ProfileController: UICollectionViewController {
         view.backgroundColor = .white
         collectionView.register(ProfileCell.self, forCellWithReuseIdentifier: cellIdentifier)
         collectionView.register(ProfileHeader.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: headerdentifier)
+        let refresher = UIRefreshControl()
+        refresher.addTarget(self, action: #selector(handleRefresh), for: .valueChanged)
+        collectionView.refreshControl = refresher
     }
     
     //MARK: - Actions
     
+    @objc func handleRefresh() {
+        self.posts.removeAll()
+        fetchUserStats()
+        fetchPosts()
+    }
 
 }
 
@@ -146,6 +155,7 @@ extension ProfileController: ProfileHeaderDelegate {
             UserService.unfollow(uid: user.uid) { error in
                 self.user.isFollowed = false
                 self.collectionView.reloadData()
+                PostService.updateUserFeedAfterFollowing(user: self.user, didFollow: false)
             }
         } else {
             UserService.follow(uid: user.uid) { error in
@@ -153,6 +163,7 @@ extension ProfileController: ProfileHeaderDelegate {
                 self.collectionView.reloadData()
                 
                 NotificationService.uploadNotification(toUid: self.user.uid, type: .follow, forUser: currentUser)
+                PostService.updateUserFeedAfterFollowing(user: self.user, didFollow: true)
             }
 
         }

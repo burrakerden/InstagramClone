@@ -24,6 +24,7 @@ class FeedController: UICollectionViewController {
         super.viewDidLoad()
         configureUI()
         fetchPosts()
+        
     }
     
     //MARK: - Helpers
@@ -44,7 +45,7 @@ class FeedController: UICollectionViewController {
     func fetchPosts() {
         guard post == nil else {return}
         
-        PostService.fetchPosts { posts in
+        PostService.fetchFeedPost { posts in
             self.posts = posts
             self.collectionView.refreshControl?.endRefreshing()
             self.checkIfUserLikedPosts()

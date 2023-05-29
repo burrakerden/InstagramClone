@@ -36,6 +36,7 @@ class UploadViewController: UIViewController {
     private lazy var captionTextView: InputTextView = {
         let tv = InputTextView()
         tv.placeholderText = "Enter caption.."
+        tv.autocorrectionType = .no
         tv.delegate = self
         return tv
     }()

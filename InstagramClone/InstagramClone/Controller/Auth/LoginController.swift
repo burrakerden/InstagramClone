@@ -111,7 +111,8 @@ class LoginController: UIViewController {
     }
     
     @objc func forgotPasswordButtonTapped() {
-        print("forgotPasswordButtonTapped")
+        let vc = ResetPasswordController()
+        navigationController?.pushViewController(vc, animated: true)
     }
     
     @objc func textDidChange(sender: UITextField) {

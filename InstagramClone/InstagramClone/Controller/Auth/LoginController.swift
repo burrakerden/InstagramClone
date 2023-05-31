@@ -112,6 +112,7 @@ class LoginController: UIViewController {
     
     @objc func forgotPasswordButtonTapped() {
         let vc = ResetPasswordController()
+        vc.delegate = self
         navigationController?.pushViewController(vc, animated: true)
     }
     
@@ -140,4 +141,13 @@ extension LoginController: FormViewModel {
         loginButton.backgroundColor = viewModel.buttonBgColour
         loginButton.isEnabled = viewModel.formIsValid
     }
+}
+
+extension LoginController: ResetPasswordControllerDelegate {
+    func controllerDidSentResetPasswordLink(_ controller: ResetPasswordController) {
+        navigationController?.popViewController(animated: true)
+        showMessage(withTitle: "Success", message: "We sent a link to your email to reset your password")
+    }
+    
+    
 }

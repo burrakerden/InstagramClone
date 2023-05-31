@@ -7,9 +7,17 @@
 
 import UIKit
 
+protocol ResetPasswordControllerDelegate: AnyObject {
+    func controllerDidSentResetPasswordLink(_ controller: ResetPasswordController)
+}
+
 class ResetPasswordController: UIViewController {
     
     //MARK: - Properties
+    
+    private var viewModel = ResetPasswordViewModel()
+    
+    weak var delegate: ResetPasswordControllerDelegate?
     
     private let iconImage: UIImageView = {
         let iv = UIImageView()
@@ -18,9 +26,10 @@ class ResetPasswordController: UIViewController {
         return iv
     }()
     
-    private let emailTextField: UITextField = {
+    private lazy var emailTextField: UITextField = {
         let tf = CustomTextField(placeholder: "Email")
         tf.keyboardType = .emailAddress
+        tf.addTarget(self, action: #selector(textFieldDidChange), for: .editingChanged)
 
         return tf
     }()
@@ -74,10 +83,35 @@ class ResetPasswordController: UIViewController {
     //MARK: - Actions
     
     @objc func resetPasswordButtonTapped() {
-        
+        guard let email = emailTextField.text else {return}
+        showLoader(true)
+        AuthService.resetPassword(withEmail: email) { err in
+            if let err = err {
+                self.showMessage(withTitle: "Error", message: err.localizedDescription)
+                self.showLoader(false)
+            }
+            
+            self.delegate?.controllerDidSentResetPasswordLink(self)
+        }
     }
     
     @objc func backButtonTapped() {
         navigationController?.popViewController(animated: true)
     }
+    
+    @objc func textFieldDidChange(_ sender: UITextField) {
+        viewModel.email = sender.text
+        updateForm()
+    }
+    
 }
+
+//MARK: - FormViewModel
+
+extension ResetPasswordController: FormViewModel {
+    func updateForm() {
+        resetPasswordButton.backgroundColor = viewModel.buttonBgColour
+        resetPasswordButton.isEnabled = viewModel.formIsValid
+    }
+}
+

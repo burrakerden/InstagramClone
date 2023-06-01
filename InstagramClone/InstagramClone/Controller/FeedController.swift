@@ -24,7 +24,7 @@ class FeedController: UICollectionViewController {
         super.viewDidLoad()
         configureUI()
         fetchPosts()
-        
+        checkIfUserLikedPosts()
     }
     
     //MARK: - Helpers
@@ -53,13 +53,22 @@ class FeedController: UICollectionViewController {
     }
     
     func checkIfUserLikedPosts() {
-        self.posts.forEach { post in
+        if let post = post {
             PostService.checkIfUserLikePost(post: post) { didLike in
-                if let index = self.posts.firstIndex(where: { $0.postId == post.postId }) {
-                    self.posts[index].didLike = didLike
+                self.post?.didLike = didLike
+                self.collectionView.reloadData()
+            }
+        } else {
+            posts.forEach { post in
+                PostService.checkIfUserLikePost(post: post) { didLike in
+                    if let index = self.posts.firstIndex(where: { $0.postId == post.postId }) {
+                        self.posts[index].didLike = didLike
+                    }
                 }
             }
         }
+        
+
     }
     
     //MARK: - Actions

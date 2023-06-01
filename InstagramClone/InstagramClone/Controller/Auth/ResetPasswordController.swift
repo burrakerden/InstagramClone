@@ -14,6 +14,7 @@ protocol ResetPasswordControllerDelegate: AnyObject {
 class ResetPasswordController: UIViewController {
     
     //MARK: - Properties
+    var email: String?
     
     private var viewModel = ResetPasswordViewModel()
     
@@ -53,7 +54,6 @@ class ResetPasswordController: UIViewController {
     //MARK: - Life Cycle
     override func viewDidLoad() {
         configureUI()
-        title = "brua"
     }
     
     
@@ -62,6 +62,10 @@ class ResetPasswordController: UIViewController {
     func configureUI() {
         configureGradientLayer()
         
+        emailTextField.text = email
+        viewModel.email = email
+        updateForm()
+
         view.addSubview(backButton)
         backButton.anchor(top: view.safeAreaLayoutGuide.topAnchor, left: view.leftAnchor, paddingTop: 16, paddingLeft: 16, height: 20)
         

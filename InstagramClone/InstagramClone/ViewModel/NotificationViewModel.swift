@@ -18,12 +18,20 @@ struct NotificationViewModel {
     var postImageUrl: URL? {return URL(string: notification.postImageUrl ?? "")}
     
     var profileImageUrl: URL? {return URL(string: notification.userProfileImageUrl)}
+    
+    var timestampString: String? {
+        let formatter = DateComponentsFormatter()
+        formatter.allowedUnits = [.second, .minute, .hour, .day, .weekOfMonth]
+        formatter.maximumUnitCount = 1
+        formatter.unitsStyle = .abbreviated
+        return formatter.string(from: notification.timestamp.dateValue(), to: Date())
+    }
         
     var notificationMessage: NSAttributedString {
         let username = notification.username
         let message = notification.type.NotificationMessage
-        let time = "2m"
-        return attributedStatText(username: username, message: message, time: time)
+        let time = timestampString
+        return attributedStatText(username: username, message: message, time: time ?? "")
     }
 
     func attributedStatText(username: String, message: String, time: String) -> NSAttributedString {

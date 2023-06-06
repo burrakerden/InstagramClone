@@ -14,7 +14,6 @@ struct NotificationService {
         guard let currentUid = Auth.auth().currentUser?.uid else {return}
         guard uid != currentUid else {return}
         
-//        UserService.fetchUserWithUid(uid: currentUid) { user in
             let docRef =  COLLECTION_NOTIFICATIONS.document(uid).collection("user-notifications").document()
             
             var data: [String: Any] = ["timestamp": Timestamp(date: Date()),
@@ -29,9 +28,6 @@ struct NotificationService {
             }
                 
             docRef.setData(data)
-//        }
-        
-
     }
     
     static func fetchNotification(completion: @escaping([Notification]) -> Void) {

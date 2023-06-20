@@ -46,3 +46,6 @@ Other Features:
 
 
 ## ↓↓ Short Video ↓↓
+
+![RocketSim_Recording_iPhone_13_2023-06-20_10 08 27](https://github.com/burrakerden/InstagramClone/assets/116464498/6b3264a2-1f02-430d-be0f-0c7b3cb36900)
+
